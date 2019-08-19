@@ -17,7 +17,7 @@ s.summary          = 'SSTSwitch contains multiple types of switches to use easil
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
-s.description      = 'SSTSwitch'
+s.description      = 'SSTSwitch is a collection of multiple switches that are customizable'
 
 s.homepage         = 'https://github.com/bupstan/SSTSwitch'
 s.license          = { :type => 'MIT', :file => 'LICENSE' }
