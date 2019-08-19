@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'SSTSwitch_Example' do
+  pod 'SSTSwitch', :path => '../'
+
+  target 'SSTSwitch_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
