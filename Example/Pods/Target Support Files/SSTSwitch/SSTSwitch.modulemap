@@ -1,0 +1,6 @@
+framework module SSTSwitch {
+  umbrella header "SSTSwitch-umbrella.h"
+
+  export *
+  module * { export * }
+}

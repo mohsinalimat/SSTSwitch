@@ -6,6 +6,5 @@ target 'SSTSwitch_Example' do
   target 'SSTSwitch_Tests' do
     inherit! :search_paths
 
-    
   end
 end

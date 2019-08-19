@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SSTSwitch
 
 class ViewController: UIViewController {
 

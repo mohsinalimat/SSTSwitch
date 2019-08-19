@@ -1,0 +1,16 @@
+PODS:
+  - SSTSwitch (0.0.1)
+
+DEPENDENCIES:
+  - SSTSwitch (from `../`)
+
+EXTERNAL SOURCES:
+  SSTSwitch:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  SSTSwitch: 8fe2be9a7989f5432e586a00c13014975ec10f0c
+
+PODFILE CHECKSUM: 8b548703426f1e6ddc80904d7d68baa525a010b3
+
+COCOAPODS: 1.7.2

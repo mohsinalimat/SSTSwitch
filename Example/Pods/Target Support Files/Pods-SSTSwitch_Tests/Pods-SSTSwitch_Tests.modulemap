@@ -1,0 +1,6 @@
+framework module Pods_SSTSwitch_Tests {
+  umbrella header "Pods-SSTSwitch_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
