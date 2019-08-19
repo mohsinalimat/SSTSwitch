@@ -8,12 +8,12 @@
 
 import UIKit
 
-enum SSTSwitchType: Int {
+public enum SSTSwitchType: Int {
     case material
     case ios
     case iosImg
     case rounded
-    var label: String {
+    public var label: String {
         switch self {
         case .material: return "Material Switch"
         case .ios: return "iOS Switch"
@@ -23,12 +23,12 @@ enum SSTSwitchType: Int {
     }
 }
 
-enum SSTSwitchState: Int {
+public enum SSTSwitchState: Int {
     case on
     case off
     case onSuspend
     case offSuspend
-    var label: String {
+    public var label: String {
         switch self {
         case .on: return "On State"
         case .off: return "Off State"
@@ -38,7 +38,7 @@ enum SSTSwitchState: Int {
     }
 }
 
-protocol SSTSwitchDelegate {
+public protocol SSTSwitchDelegate {
     func didToggleSwitch(currentState: SSTSwitchState)
 }
 
@@ -77,12 +77,12 @@ public class SSTSwitch: UIView {
     private var totalDistanceX: CGFloat!
     private var startLocationX: CGFloat!
     
-    var delegate: SSTSwitchDelegate?
+    public var delegate: SSTSwitchDelegate?
     
     // MARK: SSTSwitch Properties
     /// Padding for image in iOSImg Switch Type.
     /// Padding Value of 5 results the image to be padded all around in 5 points
-    var imgPadding: CGFloat = 0 {
+    public var imgPadding: CGFloat = 0 {
         didSet {
             if let _ = sliderKnobImage {
                 let size = knobSize - imgPadding * 2
@@ -98,7 +98,7 @@ public class SSTSwitch: UIView {
     
     // MARK: Knob Clear
     /// Set to true to clear knob for both on and off states.
-    var knobClear: Bool = false {
+    public var knobClear: Bool = false {
         didSet {
             if knobClear {
                 onColorKnob = UIColor.clear
@@ -110,7 +110,7 @@ public class SSTSwitch: UIView {
     
     // MARK: Custom Corner Radius
     /// Custom corner radius for crease rectangle.
-    var switchCornerRadius: CGFloat = 10 {
+    public var switchCornerRadius: CGFloat = 10 {
         didSet {
             if switchType == .rounded {
                 let ratio: CGFloat!
@@ -127,7 +127,7 @@ public class SSTSwitch: UIView {
     }
     
     /// Type of the switch (Material, iOS, iOS /w Img, Rounded) in raw value order
-    var switchType: SSTSwitchType! = .ios {
+    public var switchType: SSTSwitchType! = .ios {
         didSet {
             switch switchType! {
             case .ios, .iosImg:
@@ -146,7 +146,7 @@ public class SSTSwitch: UIView {
     }
     
     /// State of the switch (On or Off). Will instantly change to the desired state with no animations
-    var state: SSTSwitchState! {
+    public var state: SSTSwitchState! {
         didSet {
             switchState = state
             refreshViews()
@@ -154,7 +154,7 @@ public class SSTSwitch: UIView {
     }
     
     /// Image of the knob for the iOS /w Img type of switch
-    var image: UIImage! {
+    public var image: UIImage! {
         didSet {
             if switchType == .iosImg {
                 sliderKnobImage.image = image
@@ -163,7 +163,7 @@ public class SSTSwitch: UIView {
     }
     
     /// Active Color of the knob
-    var activeColorKnob: UIColor! {
+    public var activeColorKnob: UIColor! {
         didSet {
             onColorKnob = activeColorCrease
             updateColors()
@@ -171,7 +171,7 @@ public class SSTSwitch: UIView {
     }
     
     /// Active Color of the crease
-    var activeColorCrease: UIColor! {
+    public var activeColorCrease: UIColor! {
         didSet {
             onColorCrease = activeColorCrease
             updateColors()
@@ -179,7 +179,7 @@ public class SSTSwitch: UIView {
     }
     
     /// Idle Color of the knob
-    var idleColorKnob: UIColor! {
+    public var idleColorKnob: UIColor! {
         didSet {
             offColorKnob = idleColorKnob
             updateColors()
@@ -187,7 +187,7 @@ public class SSTSwitch: UIView {
     }
     
     /// Idle Color of the crease
-    var idleColorCrease: UIColor! {
+    public var idleColorCrease: UIColor! {
         didSet {
             offColorCrease = idleColorCrease
             updateColors()
@@ -225,7 +225,7 @@ public class SSTSwitch: UIView {
      - image: if you chose an iosImg switch type, you must pass on your desired UIImage. Otherwise, it will fill an empty UIImage
      - cornerRadius: if you chose a rounded switch type, you can specify your desired cornerRadius for the *crease*
      */
-    init(size: CGSize? = nil, type: SSTSwitchType, state: SSTSwitchState? = .off,
+    public init(size: CGSize? = nil, type: SSTSwitchType, state: SSTSwitchState? = .off,
          activeColorKnob: UIColor? = nil, activeColorCrease: UIColor? = nil,
          idleColorKnob: UIColor? = nil, idleColorCrease: UIColor? = nil,
          image: UIImage? = nil, cornerRadius: CGFloat? = nil) {
@@ -271,7 +271,15 @@ public class SSTSwitch: UIView {
         
         self.heightAnchor.constraint(equalToConstant: mainFrame.height).isActive = true
         self.widthAnchor.constraint(equalToConstant: mainFrame.width).isActive = true
-
+        if cornerRadius != nil {
+            commonSetup(size: mainFrame.size, cornerRadius: cornerRadius)
+            return
+        }
+        if image != nil {
+            commonSetup(size: mainFrame.size, image: image)
+            return
+        }
+        
         commonSetup(size: mainFrame.size)
     }
     
